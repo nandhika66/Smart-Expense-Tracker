@@ -9,7 +9,6 @@ import java.util.List;
 
 public class ExpenseService {
 
-    // CREATE
     public void addExpense(double amount, String category, String note, String date) {
         String sql = "INSERT INTO expenses (amount, category, note, date) VALUES (?, ?, ?, ?)";
         try (Connection con = DatabaseConnection.getConnection();
@@ -19,7 +18,6 @@ public class ExpenseService {
             ps.setString(2, category);
             ps.setString(3, note);
 
-            // If your DB column is DATE, convert string "YYYY-MM-DD" to java.sql.Date:
             ps.setDate(4, java.sql.Date.valueOf(date)); // safer if date column is DATE
 
             ps.executeUpdate();
@@ -29,7 +27,7 @@ public class ExpenseService {
         }
     }
 
-    // READ
+    // Reading
     public List<Expense> getAllExpenses() {
         List<Expense> list = new ArrayList<>();
         String sql = "SELECT * FROM expenses";
@@ -43,7 +41,7 @@ public class ExpenseService {
                         rs.getDouble("amount"),
                         rs.getString("category"),
                         rs.getString("note"),
-                        rs.getDate("date").toString() // convert Date to String YYYY-MM-DD
+                        rs.getDate("date").toString() // converting Date to String YYYY-MM-DD
                 ));
             }
         } catch (Exception e) {
@@ -52,7 +50,7 @@ public class ExpenseService {
         return list;
     }
 
-    // UPDATE
+    // Updating
     public void updateExpense(int id, double newAmount, String newCategory, String newNote, String newDate) {
         String sql = "UPDATE expenses SET amount=?, category=?, note=?, date=? WHERE id=?";
         try (Connection con = DatabaseConnection.getConnection();
@@ -71,7 +69,7 @@ public class ExpenseService {
         }
     }
 
-    // DELETE
+    // Deleting
     public void deleteExpense(int id) {
         String sql = "DELETE FROM expenses WHERE id=?";
         try (Connection con = DatabaseConnection.getConnection();

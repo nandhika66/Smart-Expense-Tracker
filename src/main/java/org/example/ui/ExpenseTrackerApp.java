@@ -37,7 +37,7 @@ public class ExpenseTrackerApp {
 
             } else if (choice == 2) {
                 List<Expense> expenses = service.getAllExpenses();
-                if (expenses.isEmpty()) System.out.println("⚠️ No expenses found.");
+                if (expenses.isEmpty()) System.out.println("No expenses found.");
                 else for (Expense e : expenses) System.out.println(e);
 
             } else if (choice == 3) {
@@ -59,7 +59,7 @@ public class ExpenseTrackerApp {
                 service.deleteExpense(id);
 
             } else if (choice == 5) {
-                System.out.println("Goodbye!");
+                System.out.println("Thank you for using Expense Tracker!");
                 break;
             } else {
                 System.out.println("Invalid choice.");
